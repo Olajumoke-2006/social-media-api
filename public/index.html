@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PinkSocial Hub</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- INTERNAL CSS -->
+    <style>
+
+        /* GLOBAL */
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: #000000;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* HEADER */
+
+        header {
+            background: #111111;
+            border-bottom: 2px solid #ff1493;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            color: #ff69b4;
+            font-size: 2.5rem;
+        }
+
+        /* NAVIGATION */
+
+        nav {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            background: linear-gradient(45deg, #ff1493, #ff69b4);
+            padding: 0.8rem 1.5rem;
+            border-radius: 10px;
+            transition: 0.3s ease;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(45deg, #ff69b4, #ff1493);
+        }
+
+        /* MAIN */
+
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        /* HERO SECTION */
+
+        .connect {
+            background: #111111;
+            border: 2px solid #ff1493;
+            border-radius: 20px;
+            padding: 4rem 2rem;
+            max-width: 700px;
+            text-align: center;
+            box-shadow: 0 0 25px rgba(255, 20, 147, 0.2);
+        }
+
+        .connect h2 {
+            color: #ff69b4;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .connect p {
+            color: #dddddd;
+            font-size: 1.2rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        /* BUTTON */
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff1493, #ff69b4);
+            color: white;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: bold;
+            transition: 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(45deg, #ff69b4, #ff1493);
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #111111;
+            border-top: 2px solid #ff1493;
+            text-align: center;
+            padding: 1rem;
+            color: #ff69b4;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 768px) {
+
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .connect {
+                padding: 3rem 1.5rem;
+            }
+
+            .connect h2 {
+                font-size: 2.2rem;
+            }
+
+            .connect p {
+                font-size: 1rem;
+            }
+
+            nav {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav a {
+                width: 200px;
+                text-align: center;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <header>
+
+        <h1>
+            <i class="fas fa-heart"></i>
+            Welcome to PinkSocial Hub
+        </h1>
+
+        <nav>
+            <a href="/login">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </a>
+
+            <a href="/register">
+                <i class="fas fa-user-plus"></i> Register
+            </a>
+
+            <a href="/feed">
+                <i class="fas fa-rss"></i> Feed
+            </a>
+        </nav>
+
+    </header>
+
+    <main>
+
+        <section class="connect">
+
+            <h2>Connect with Friends</h2>
+
+            <p>
+                Join our social platform to share posts,
+                follow users, and stay connected in style.
+            </p>
+
+            <a href="/register" class="btn">
+                <i class="fas fa-heart"></i>
+                Get Started
+            </a>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 PinkSocial Hub</p>
+    </footer>
+
+    <script src="/script.js"></script>
+
+</body>
+</html>
