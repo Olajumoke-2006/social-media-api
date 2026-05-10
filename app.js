@@ -17,6 +17,11 @@ app.use(morgan('dev'))
 // Serve public folder
 app.use(express.static(path.join(__dirname, 'public')))
 
+// Health route
+app.get('/', (req, res) => {
+  res.send('Social Media API is running')
+})
+
 // Routes
 app.use('/api/auth', require('./routes/auth.routes'))
 app.use('/api/posts', require('./routes/post.routes'))
