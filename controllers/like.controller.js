@@ -1,84 +1,79 @@
-const Like = require('../models/Like')
-const Post = require('../models/Post')
+const Like = require('../models/Like');
+const Post = require('../models/Post');
 
-exports.likePost = async (req, res) => {
-
+exports.likePost = async (req, res, next) => {
   try {
+    const postId = req.params.postId;
 
-    const user = req.user.id
-    const post = req.params.id
+    const post = await Post.findById(postId);
+
+    if (!post) {
+      return res.status(404).json({
+        success: false,
+        message: 'Post not found'
+      });
+    }
 
     const existingLike = await Like.findOne({
-      user,
-      post
-    })
+      user: req.user.id,
+      post: postId
+    });
 
     if (existingLike) {
       return res.status(400).json({
+        success: false,
         message: 'Post already liked'
-      })
+      });
     }
 
     await Like.create({
-      user,
-      post
-    })
+      user: req.user.id,
+      post: postId
+    });
 
-    await Post.findByIdAndUpdate(post, {
-      $inc: { like_count: 1 }
-    })
+    post.like_count += 1;
 
-    res.status(201).json({
-      message: 'Post liked successfully'
-    })
+    await post.save();
 
-  } catch (error) {
-
-    res.status(500).json({
-      message: error.message
-    })
-
+    res.json({
+      success: true,
+      likes: post.like_count
+    });
+  } catch (err) {
+    next(err);
   }
+};
 
-}
-
-exports.unlikePost = async (req, res) => {
-
+exports.unlikePost = async (req, res, next) => {
   try {
+    const postId = req.params.postId;
 
-    const user = req.user.id
-    const post = req.params.id
+    const like = await Like.findOne({
+      user: req.user.id,
+      post: postId
+    });
 
-    const existingLike = await Like.findOne({
-      user,
-      post
-    })
-
-    if (!existingLike) {
-      return res.status(400).json({
-        message: 'Post not liked'
-      })
+    if (!like) {
+      return res.status(404).json({
+        success: false,
+        message: 'Like not found'
+      });
     }
 
-    await Like.findOneAndDelete({
-      user,
-      post
-    })
+    await like.deleteOne();
 
-    await Post.findByIdAndUpdate(post, {
-      $inc: { like_count: -1 }
-    })
+    const post = await Post.findById(postId);
 
-    res.status(200).json({
-      message: 'Post unliked successfully'
-    })
+    if (post && post.like_count > 0) {
+      post.like_count -= 1;
+      await post.save();
+    }
 
-  } catch (error) {
-
-    res.status(500).json({
-      message: error.message
-    })
-
+    res.json({
+      success: true,
+      likes: post.like_count
+    });
+  } catch (err) {
+    next(err);
   }
-
-}
+};

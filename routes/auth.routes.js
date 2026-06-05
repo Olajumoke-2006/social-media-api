@@ -1,13 +1,40 @@
-const express = require('express')
-const router = express.Router()
+const router = require('express').Router();
 
 const {
-  signup,
+  register,
   login
-} = require('../controllers/auth.controller')
+} = require('../controllers/auth.controller');
 
-router.post('/signup', signup)
+const {
+  body
+} = require('express-validator');
 
-router.post('/login', login)
+const validate =
+require('../middleware/validate.middleware');
 
-module.exports = router
+router.post(
+  '/register',
+  [
+    body('first_name').notEmpty(),
+    body('last_name').notEmpty(),
+    body('username').notEmpty(),
+    body('email').isEmail(),
+    body('password').isLength({
+      min: 6
+    })
+  ],
+  validate,
+  register
+);
+
+router.post(
+  '/login',
+  [
+    body('email').isEmail(),
+    body('password').notEmpty()
+  ],
+  validate,
+  login
+);
+
+module.exports = router;

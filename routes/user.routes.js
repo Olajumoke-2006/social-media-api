@@ -4,20 +4,20 @@ const auth =
 require('../middleware/auth.middleware');
 
 const {
-  likePost,
-  unlikePost
-} = require('../controllers/like.controller');
+  getMyPosts,
+  getFeed
+} = require('../controllers/user.controller');
 
-router.post(
-  '/:postId',
+router.get(
+  '/me/posts',
   auth,
-  likePost
+  getMyPosts
 );
 
-router.delete(
-  '/:postId',
+router.get(
+  '/feed',
   auth,
-  unlikePost
+  getFeed
 );
 
 module.exports = router;

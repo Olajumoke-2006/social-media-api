@@ -1,42 +1,44 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
-const postSchema = new mongoose.Schema({
+const postSchema = new mongoose.Schema(
+{
+    title:{
+        type:String,
+        required:true
+    },
 
-  title: {
-    type: String,
-    required: true
-  },
+    content:{
+        type:String,
+        required:true
+    },
 
-  content: {
-    type: String,
-    required: true
-  },
+    author:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"User"
+    },
 
-  author: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  },
+    tags:[String],
 
-  tags: [String],
+    state:{
+        type:String,
+        enum:["draft","published"],
+        default:"draft"
+    },
 
-  state: {
-    type: String,
-    enum: ['draft', 'published'],
-    default: 'draft'
-  },
+    like_count:{
+        type:Number,
+        default:0
+    },
 
-  like_count: {
-    type: Number,
-    default: 0
-  },
+    comment_count:{
+        type:Number,
+        default:0
+    }
 
-  comment_count: {
-    type: Number,
-    default: 0
-  }
+},
+{
+    timestamps:true
+}
+);
 
-}, {
-  timestamps: true
-})
-
-module.exports = mongoose.model('Post', postSchema)
+module.exports = mongoose.model("Post", postSchema);

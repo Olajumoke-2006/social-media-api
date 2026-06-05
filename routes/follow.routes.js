@@ -1,21 +1,37 @@
-const express = require('express')
-const router = express.Router()
+const router = require('express').Router();
 
-const auth = require('../middlewares/auth.middleware')
+const auth =
+require('../middleware/auth.middleware');
 
 const {
   followUser,
   unfollowUser,
-  getFollowers,
+  getFollowing,
+  getFollowers
+} = require('../controllers/follow.controller');
+
+router.post(
+  '/:userId',
+  auth,
+  followUser
+);
+
+router.delete(
+  '/:userId',
+  auth,
+  unfollowUser
+);
+
+router.get(
+  '/following',
+  auth,
   getFollowing
-} = require('../controllers/follow.controller')
+);
 
-router.post('/:id/follow', auth, followUser)
+router.get(
+  '/followers',
+  auth,
+  getFollowers
+);
 
-router.delete('/:id/unfollow', auth, unfollowUser)
-
-router.get('/:id/followers', auth, getFollowers)
-
-router.get('/:id/following', auth, getFollowing)
-
-module.exports = router
+module.exports = router;

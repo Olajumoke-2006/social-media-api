@@ -130,5 +130,4 @@ npm test
 ---
 
 # Author
-
-Your Name
+Kolawole Moyosore Olajumoke
